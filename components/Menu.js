@@ -30,16 +30,16 @@ let menuItems = [
     menu.appendChild(blah);
     
     const menuButton = document.querySelector('.menu-button');
-    menuButton.addEventListener('click', ()=> {
-      menu.classList.toggle('menu-open');
-    })
+    menuButton.addEventListener('click', () => {
+      menu.classList.toggle('menu--open');
+    });
     
     //li
-    arr.forEach(element => {
+    arr.forEach((element) => {
       const li = document.createElement('li');
       li.textContent = element;
       blah.appendChild(li);
-  });
+    });
   menuButton.appendChild(menu);
     return menu;
   }
