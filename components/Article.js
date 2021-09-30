@@ -90,27 +90,64 @@ const data = [
 ];
 
 /*
-  Step 1: Write a component called 'articleMaker' to create an article.
+  Step 1: Write a component (function) called 'articleMaker' to create an article.
   Your component is a function that takes an article object as its only argument,
   and returns a DOM node looking like the one below:
 
-  <div class="article">
-    <h2>{title of the article}</h2>
-    <p class="date">{date of the article}</p>
+  <div class="article">                               // article
+    <h2>{title of the article}</h2>                   // articleTitle
+    <p class="date">{date of the article}</p>         // date
+                                                      // articleParagraphs: 1,2,3
 
     {three separate paragraph elements}
 
-    <span class="expandButton">+</span>
+    <span class="expandButton">+</span>               // spanButton
   </div>
-
-  Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
-  This listener should toggle the class 'article-open' on div.article.
-
-  Step 3: Don't forget to return something from your function!
-
-  Step 4: Outside your function now, loop over the data. At each iteration you'll use your component
-  to create a div.article element and append it to the DOM inside div.articles (see index.html).
-
-  Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
-  Refresh the page to see the new article.
 */
+
+const articlesParent = document.querySelector('.articles');
+
+function articleMaker(obj) {
+  const article = document.createElement('div');
+  article.classList.add('article');
+
+  const articaleTitle = document.createElement('h2');
+  articaleTitle.textContent = obj.title;
+
+  const dateParagrah = document.createElement('p');
+  dateParagrah.classList.add('date');
+  dateParagrah.textContent = obj.date;
+
+  const articleParagraphs1 = document.createElement('p');
+  articleParagraphs1.textContent = obj.firstParagraph;
+
+  const articleParagraphs2 = document.createElement('p');
+  articleParagraphs1.textContent = obj.secondParagraph;
+
+  const articleParagraphs3 = document.createElement('p');
+  articleParagraphs1.textContent = obj.thirdParagraph;
+
+  const spanButton = document.createElement('span');
+  spanButton.classList.add('expandButton');
+
+  article.append(articaleTitle, dateParagrah, articleParagraphs1, articleParagraphs2, articleParagraphs3, spanButton);
+  article.addEventListener('click', () => article.classList.toggle('article-open'));
+
+  return article;
+
+  }
+
+  // Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
+  // This listener should toggle the class 'article-open' on div.article. 
+
+  // Step 3: Don't forget to return something from your function!
+
+  // Step 4: Outside your function now, loop over the data. At each iteration you'll use your component
+  // to create a div.article element and append it to the DOM inside div.articles (see index.html).
+
+  data.forEach( e => {
+    articlesParent.appendChild(articleMaker(e));
+  })
+
+  // Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
+  // Refresh the page to see the new article 
